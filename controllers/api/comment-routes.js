@@ -14,4 +14,7 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+
+//Bonus: Edit and Delete
+
 module.exports = router;

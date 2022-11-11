@@ -4,37 +4,46 @@ const { Post, Comment, User } = require('../models/');
 //get all posts for homepage
 router.get('/', async (req, res) => {
     //Post findAll
-    const postData = await Post.findAll().catch((err) => {
+    const postData = await Post.findAll({
+        //check syntax
+        include: [User],
+    }).catch((err) => {
        res.json(err);
     });
-    const posts = postData.map((post) => post.get({plain: true}));
-    res.render('homepage', {posts});
 
     //map through the data, serialize it
-
+    const posts = postData.map((post) => post.get({plain: true}));
     //render appropriate view, sending it the data it needs (the posts)
+    res.render('homepage', {posts, session: req.session});
 
 });
 
 //get single post
 router.get('/post/:id', async (req, res)=> {
     try{
-        const postData = await Post.findByPk(req.params.id);
+        //find a post by PK
+        const postData = await Post.findByPk(req.params.id, {
+            inclue: [
+                //get the user for EACH post
+                User,
+                {
+                    model: Comment,
+                    include: [User],
+                },
+            ],
+        });
         if(!postData) {
             res.status(404).json({message: 'No post with this id!'});
             return;
         }
         const post = postData.get({plain: true});
         console.log(post);
-        res.render('single-post', post);
+        //render appropriate view, sending it the data it needs (the post)
+        res.render('single-post', {post});
     } catch (err) {
         res.status(500).json(err);
     };
-    //find a post by PK
-
-    //serialize data
     
-    //render appropriate view, sending it the data it needs (the post)
 });
 
 router.get('/login', (req, res) => {

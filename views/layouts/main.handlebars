@@ -16,13 +16,19 @@
         <a href="/">Fund My Project!</a>
       </h1>
       <nav>
+        <ul>
         <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
+        <li>
+        <a href="./dashboard.handlebars">My Dashboard</a> |
         <button class="no-button" id="logout">logout</button>
-        {{else}}
+        </li>
+
+
+         {{#if logged_in}}
         <a href="/login">login</a>
+         {{else}}
         {{/if}}
+        </ul>
       </nav>
     </header>
     <main class="container container-fluid mt-5">

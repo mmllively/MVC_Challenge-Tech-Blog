@@ -18,16 +18,23 @@
       <nav>
         <ul>
         <!-- Conditionally render login or logout links -->
-        <li>
-        <a href="./dashboard.handlebars">My Dashboard</a> |
-        <button class="no-button" id="logout">logout</button>
-        </li>
-
-
          {{#if logged_in}}
-        <a href="/login">login</a>
-         {{else}}
+       
+        <button><a href="/dashboard">My adshboard</a> </button> 
+
+        <button class="no-button" id="logout">logout</button>
+       
+         <!-- logout link here -->
+          {{else}}
+       
+          <button><a href="/login">Log In / Sign Up</a></button>
+       
         {{/if}}
+
+        
+
+        
+       
         </ul>
       </nav>
     </header>

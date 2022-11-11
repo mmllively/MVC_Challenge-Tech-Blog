@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     //map through the data, serialize it
     const posts = postData.map((post) => post.get({plain: true}));
     //render appropriate view, sending it the data it needs (the posts)
-    res.render('homepage', {posts, session: req.session});
+    res.render('homepage', {posts, logged_in: req.session.logged_in });
 
 });
 
@@ -47,7 +47,7 @@ router.get('/post/:id', async (req, res)=> {
 });
 
 router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
+    if (req.session.logged_in) {
       res.redirect('/');
       return;
     }
@@ -56,7 +56,7 @@ router.get('/login', (req, res) => {
 
 
 router.get('/signup', (req, res) => {
-    if (req.session.signedUp) {
+    if (req.session.logged_in) {
       res.redirect('/');
       return;
     }

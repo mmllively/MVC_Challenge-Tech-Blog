@@ -21,11 +21,14 @@ router.post('/', withAuth, async (req, res) => {
   //add an update PUT route
 
   router.put('/:id', withAuth, async (req, res) => {
+    console.log("testing");
     try {
-        const postData = await Post.update({
+        const postData = await Post.update(
+          req.body,
+          {
           where: {
             id: req.params.id,
-            user_id: req.session.user_id,
+            user_id: req.session.user_id
           },
   });
   if (!postData) {
@@ -35,11 +38,12 @@ router.post('/', withAuth, async (req, res) => {
 
   res.status(200).json(postData);
 } catch (err) {
+  console.log(err)
   res.status(500).json(err);
 }
 });
 
-  router.delete('/:id', withAuth, async (req, res) => {
+  router.delete('/:id', withAuth,  async (req, res) => {
     try {
       const postData = await Post.destroy({
         where: {

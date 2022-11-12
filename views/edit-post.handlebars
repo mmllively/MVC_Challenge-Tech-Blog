@@ -1,0 +1,16 @@
+{{!-- create a form that is prepopulated with data from the post 
+
+
+input elements (value property where you get input from the field or put the value from the field)and text area elements--}}
+
+
+<div>
+    <h2 id={{post.id}}>Title</h2>
+    <input id ="post-title" value={{post.title}}>
+    <h2>Content</h2>
+    <textarea id="post-text">{{post.text}}</textarea>
+    <button id = "edit-btn">EDIT</button>
+</div>
+
+
+<script src="/js/edit.js"></script>

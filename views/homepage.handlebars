@@ -1,6 +1,24 @@
-<h1>Hello World!</h1>
+{{!-- <h1>Hello World!</h1>
 <div>
     {{#each posts}}
     <a href = "/post/{{id}}"><h3>{{title}}</h3></a>
     {{/each}}
+</div> --}}
+
+
+
+
+<!-- Loop over each object in the posts array -->
+{{#each posts as |post| }}
+<div class="row mb-4 project">
+  <div class="col-md-5">
+    <h2>
+      <a href="/all-posts/{{user.id}}">{{post.title}}</a>
+    </h2>
+    <p>Created by {{post.author}} </p>
+  </div>
 </div>
+{{/each}}
+
+
+{{!-- on {{format_date project.date_created}} --}}

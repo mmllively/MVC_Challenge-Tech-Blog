@@ -5,23 +5,29 @@
 //Shows user posts, create and edit
 
 const router = require('express').Router();
-const { Post } = require('../models');
+const { Post, Comment, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 //get all posts GET --gotes to all new admin
 router.get('/', withAuth, async (req, res) => {
-    // try {
-    //   const newPost = await Post.create({
-    //     ...req.body,
-    //     user_id: req.session.user_id,
-    //   });
-  
-    //   res.status(200).json(newPost);
-    // } catch (err) {
-    //   res.status(400).json(err);
-    // }
-    res.render("dashboard")
-  });
+    try {
+      const postData = await Post.findAll({
+        where: {
+        user_id: req.session.user_id
+      },
+      include: [{model: User}]
+    });
+
+    const posts = postData.map((post) => post.get({plain: true}));
+    res.render("dashboard",{posts, logged_in: req.session.logged_in });
+
+} catch (err) {
+  res.status(400).json(err);
+}
+});
+
+
+
 
 module.exports = router;
   //create new posts POST --new post

@@ -15,10 +15,6 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     text: {
       type: DataTypes.STRING,
       allowNull: false,

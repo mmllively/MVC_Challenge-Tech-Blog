@@ -5,14 +5,7 @@ const { Post, Comment, User } = require('../models/');
 router.get('/', async (req, res) => {
     try {
     //Post findAll
-    const postData = await Post.findAll({
-        include: [
-            {
-                model: User, 
-                attributes: ['username'],
-            },
-            ],
-    });
+    const postData = await Post.findAll();
 
     //map through the data, serialize it
     const posts = postData.map((post) => post.get({plain: true}));

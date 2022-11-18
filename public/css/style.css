@@ -1,0 +1,15 @@
+*{
+    font-family: sans-serif;
+}
+
+.card-title{
+    text-align:center;
+}
+
+.headername {
+    text-align: center;
+}
+
+.card {
+    background-color: lightgrey;
+}

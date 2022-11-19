@@ -16,7 +16,8 @@
     <h2 class = card-title>
       <a href="/post/{{post.id}}">{{post.title}}</a>
     </h2>
-    <p>Created by: {{user.id}} </p>
+    <p>Created by: {{post.User.username}} </p>
+    <p>{{format_date createdAt}}</p>
   </div>
 </div>
 </section>

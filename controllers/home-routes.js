@@ -5,11 +5,16 @@ const { Post, Comment, User } = require('../models/');
 router.get('/', async (req, res) => {
     try {
     //Post findAll
-    const postData = await Post.findAll();
+    const postData = await Post.findAll({
+        include: [{model: User}],
+    });
 
     //map through the data, serialize it
     const posts = postData.map((post) => post.get({plain: true}));
     //render appropriate view, sending it the data it needs (the posts)
+
+ console.log(posts)
+
     res.render('homepage', {posts, logged_in: req.session.logged_in 
     });
 } catch (err) {
@@ -39,7 +44,7 @@ router.get('/post/:id', async (req, res)=> {
         const post = postData.get({plain: true});
         console.log(post);
         //render appropriate view, sending it the data it needs (the post)
-        res.render('single-post', {post});
+        res.render('single-post', {post, logged_in:req.session.logged_in});
     } catch (err) {
         res.status(500).json(err);
     };

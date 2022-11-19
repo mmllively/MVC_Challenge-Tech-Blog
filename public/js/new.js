@@ -20,6 +20,12 @@ const newFormHandler = async (event) => {
       }
     }
   };
+
+
+
+  document
+  .querySelector('.new-post-form')
+  .addEventListener('submit', newFormHandler);
   
   const delButtonHandler = async (event) => {
     if (event.target.hasAttribute('delBtn')) {
